@@ -112,6 +112,14 @@
     <Compile Include="Migrations\202211271348454_mig_admin_table.designer.cs">
       <DependentUpon>202211271348454_mig_admin_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202211281354520_mig1.cs" />
+    <Compile Include="Migrations\202211281354520_mig1.designer.cs">
+      <DependentUpon>202211281354520_mig1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202211281424552_mig-adminUserName.cs" />
+    <Compile Include="Migrations\202211281424552_mig-adminUserName.designer.cs">
+      <DependentUpon>202211281424552_mig-adminUserName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -155,6 +163,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202211271348454_mig_admin_table.resx">
       <DependentUpon>202211271348454_mig_admin_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211281354520_mig1.resx">
+      <DependentUpon>202211281354520_mig1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211281424552_mig-adminUserName.resx">
+      <DependentUpon>202211281424552_mig-adminUserName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

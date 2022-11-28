@@ -49,6 +49,7 @@ namespace MvcKamp.Controllers
             ValidationResult results = messagevalidator.Validate(p);
             if (results.IsValid)
             {
+                p.SenderMail = "emel@gmail.com";
                 p.MessageDate =DateTime.Parse(DateTime.Now.ToShortDateString().ToString());
                 mm.MessageAdd(p);
                 return RedirectToAction("SendBox");
