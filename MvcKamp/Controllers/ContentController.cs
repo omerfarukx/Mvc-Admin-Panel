@@ -11,6 +11,7 @@ namespace MvcKamp.Controllers
     public class ContentController : Controller
     {
         ContentManager cm = new ContentManager(new EfContentDal());
+
         public ActionResult Index()
         {
             return View();

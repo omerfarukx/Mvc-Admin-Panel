@@ -9,6 +9,7 @@ using System.Web.Security;
 
 namespace MvcKamp.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         // GET: Login
