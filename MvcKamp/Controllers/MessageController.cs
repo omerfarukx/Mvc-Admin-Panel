@@ -17,14 +17,14 @@ namespace MvcKamp.Controllers
         MessageValidator messagevalidator = new MessageValidator();
 
         [Authorize]
-        public ActionResult Inbox()
+        public ActionResult Inbox(string p)
         {
-            var messageList = mm.GetListInbox();
+            var messageList = mm.GetListInbox(p);
             return View(messageList);
         }
-        public ActionResult Sendbox()
+        public ActionResult Sendbox(string p)
         {
-            var messagelist = mm.GetListSendbox();
+            var messagelist = mm.GetListSendbox(p);
             return View(messagelist);
         }
         public ActionResult GetInBoxMessageDetails(int id)
@@ -49,7 +49,6 @@ namespace MvcKamp.Controllers
             ValidationResult results = messagevalidator.Validate(p);
             if (results.IsValid)
             {
-                p.SenderMail = "emel@gmail.com";
                 p.MessageDate =DateTime.Parse(DateTime.Now.ToShortDateString().ToString());
                 mm.MessageAdd(p);
                 return RedirectToAction("SendBox");

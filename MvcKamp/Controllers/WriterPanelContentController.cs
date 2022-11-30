@@ -13,11 +13,11 @@ namespace MvcKamp.Controllers
     public class WriterPanelContentController : Controller
     {
         ContentManager cm = new ContentManager(new EfContentDal());
-        Context c = new Context();
+        
 
         public ActionResult MyContent(string p)
         {
-            
+            Context c = new Context();
             p = (string)Session["WriterMail"];
             var writeridinfo = c.Writers.Where(x => x.WriterMail == p).Select(y => y.WriterID).FirstOrDefault();
             //ViewBag.d = p;
@@ -25,13 +25,15 @@ namespace MvcKamp.Controllers
             return View(contentvalues);
         }
         [HttpGet]
-        public ActionResult AddContent()
+        public ActionResult AddContent(int id)
         {
+            ViewBag.d = id;
             return View();
         }
         [HttpPost]
         public ActionResult AddContent(Content p)
         {
+            Context c = new Context();
             string mail = (string)Session["WriterMail"];
             var writeridinfo = c.Writers.Where(x => x.WriterMail == mail).Select(y => y.WriterID).FirstOrDefault();
             p.ContentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
@@ -39,6 +41,10 @@ namespace MvcKamp.Controllers
             p.ContentStatus = true;
             cm.ContentAdd(p);
             return RedirectToAction("MyContent");
+        }
+        public ActionResult ToDoList()
+        {
+            return View();
         }
     }
 }

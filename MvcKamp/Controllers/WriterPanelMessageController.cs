@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using DataAccesLayer.Concrete;
 using DataAccesLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -15,14 +16,17 @@ namespace MvcKamp.Controllers
     {
         MessageManager mm = new MessageManager(new EfMessageDal());
         MessageValidator messagevalidator = new MessageValidator();
+        Context c = new Context();
         public ActionResult Inbox()
         {
-            var messageList = mm.GetListInbox();
+            string p = (string)Session["WriterMail"];
+            var messageList = mm.GetListInbox(p);
             return View(messageList);
         }
         public ActionResult Sendbox()
         {
-            var messagelist = mm.GetListSendbox();
+            string p = (string)Session["WriterMail"];
+            var messagelist = mm.GetListSendbox(p);
             return View(messagelist);
         }
         public PartialViewResult MessageListMenu()
@@ -47,10 +51,11 @@ namespace MvcKamp.Controllers
         [HttpPost]
         public ActionResult NewMessage(Message p)
         {
-
+            string sender = (string)Session["WriterMail"];
             ValidationResult results = messagevalidator.Validate(p);
             if (results.IsValid)
             {
+                p.SenderMail = sender;
                 p.MessageDate = DateTime.Parse(DateTime.Now.ToShortDateString().ToString());
                 mm.MessageAdd(p);
                 return RedirectToAction("SendBox");
